@@ -41,8 +41,47 @@ const useCalendar = () => {
   return contextValue;
 };
 
-const DatePicker = props => {
-  const calendarUtils = new utils(props);
+const DatePicker = ({
+  onSelectedChange = () => null,
+  onMonthYearChange = () => null,
+  onTimeChange = () => null,
+  onDateChange = () => null,
+  current = '',
+  selected = '',
+  minimumDate = '',
+  maximumDate = '',
+  selectorStartingYear = 0,
+  selectorEndingYear = 3000,
+  disableDateChange = false,
+  isGregorian = true,
+  configs = {},
+  reverse = 'unset',
+  options: {},
+  mode = 'datepicker',
+  minuteInterval = 5,
+  style = {},
+ }) => {
+  const calendarUtils = new utils({
+    onSelectedChange, 
+    onMonthYearChange, 
+    onTimeChange, 
+    onDateChange, 
+    current, 
+    selected, 
+    minimumDate, 
+    maximumDate, 
+    selectorStartingYear, 
+    selectorEndingYear, 
+    disableDateChange, 
+    isGregorian, 
+    configs, 
+    reverse, 
+    options: userOptions, 
+    mode, 
+    minuteInterval, 
+    style 
+  });
+
   const contextValue = {
     ...props,
     reverse: props.reverse === 'unset' ? !props.isGregorian : props.reverse,
@@ -96,7 +135,7 @@ const DatePicker = props => {
   );
 };
 
-const styles = theme =>
+const styles = (theme) =>
   StyleSheet.create({
     container: {
       backgroundColor: theme.backgroundColor,
