@@ -4,7 +4,7 @@ import {View, TouchableOpacity, Text, Image, StyleSheet, Animated, I18nManager} 
 
 import {useCalendar} from '../DatePicker';
 
-const Header = ({changeMonth}) => {
+const Header = ({changeMonth = () => null}) => {
   const {
     options,
     disableDateChange,
@@ -202,9 +202,9 @@ const styles = (theme) =>
     },
   });
 
-Header.defaultProps = {
-  changeMonth: () => null,
-};
+// Header.defaultProps = {
+//   changeMonth: () => null,
+// };
 
 Header.propTypes = {
   changeMonth: PropTypes.func,

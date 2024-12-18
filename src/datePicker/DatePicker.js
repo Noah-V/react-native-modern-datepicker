@@ -1,4 +1,4 @@
-import React, {createContext, useReducer, useContext, useState} from 'react';
+import React, {createContext, useReducer, useContext, useState, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -56,31 +56,32 @@ const DatePicker = ({
   isGregorian = true,
   configs = {},
   reverse = 'unset',
-  options: {},
+  options = {},
   mode = 'datepicker',
   minuteInterval = 5,
-  style = {},
- }) => {
-  const calendarUtils = new utils({
-    onSelectedChange, 
-    onMonthYearChange, 
-    onTimeChange, 
-    onDateChange, 
-    current, 
-    selected, 
-    minimumDate, 
-    maximumDate, 
-    selectorStartingYear, 
-    selectorEndingYear, 
-    disableDateChange, 
-    isGregorian, 
-    configs, 
-    reverse, 
-    options: userOptions, 
-    mode, 
-    minuteInterval, 
-    style 
+  _style = {},
+}) => {
+  const [props, setProps] = useState({
+    onSelectedChange,
+    onMonthYearChange,
+    onTimeChange,
+    onDateChange,
+    current,
+    selected,
+    minimumDate,
+    maximumDate,
+    selectorStartingYear,
+    selectorEndingYear,
+    disableDateChange,
+    isGregorian,
+    configs,
+    reverse,
+    options,
+    mode,
+    minuteInterval,
+    _style,
   });
+  const calendarUtils = new utils(props);
 
   const contextValue = {
     ...props,
@@ -163,26 +164,26 @@ const optionsShape = {
 const modeArray = ['datepicker', 'calendar', 'monthYear', 'time'];
 const minuteIntervalArray = [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60];
 
-DatePicker.defaultProps = {
-  onSelectedChange: () => null,
-  onMonthYearChange: () => null,
-  onTimeChange: () => null,
-  onDateChange: () => null,
-  current: '',
-  selected: '',
-  minimumDate: '',
-  maximumDate: '',
-  selectorStartingYear: 0,
-  selectorEndingYear: 3000,
-  disableDateChange: false,
-  isGregorian: true,
-  configs: {},
-  reverse: 'unset',
-  options: {},
-  mode: 'datepicker',
-  minuteInterval: 5,
-  style: {},
-};
+// DatePicker.defaultProps = {
+//   onSelectedChange: () => null,
+//   onMonthYearChange: () => null,
+//   onTimeChange: () => null,
+//   onDateChange: () => null,
+//   current: '',
+//   selected: '',
+//   minimumDate: '',
+//   maximumDate: '',
+//   selectorStartingYear: 0,
+//   selectorEndingYear: 3000,
+//   disableDateChange: false,
+//   isGregorian: true,
+//   configs: {},
+//   reverse: 'unset',
+//   options: {},
+//   mode: 'datepicker',
+//   minuteInterval: 5,
+//   style: {},
+// };
 
 DatePicker.propTypes = {
   onSelectedChange: PropTypes.func,
